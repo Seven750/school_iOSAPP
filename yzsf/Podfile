@@ -1,0 +1,6 @@
+platform:ios,'10.0'
+target 'yzsf' do
+pod 'AFNetworking'
+pod 'SDWebImage'
+pod 'Masonry'
+end
