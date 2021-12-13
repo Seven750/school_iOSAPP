@@ -13,8 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong,nonatomic) WKBackForwardList * backForwardList;
 
+@property (strong,nonatomic) NSString *webUrl;
+
 -(NSString *)getWebUrl;
 
+- (instancetype)initWithTitle:(NSString *)title withUrl:(NSString *)url;
 @end
 
 NS_ASSUME_NONNULL_END

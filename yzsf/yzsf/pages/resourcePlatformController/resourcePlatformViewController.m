@@ -10,7 +10,7 @@
 #import "topPlatformViewCell.h"
 #import "newsPlatformViewCell.h"
 #import "topPlatformCollectionViewCell.h"
-#import "learningResourceWebController.h"
+#import "seven750WebController.h"
 
 @interface resourcePlatformViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableV;
@@ -124,6 +124,14 @@
     
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    TopNewsResponse *res= self.dataSourceT[indexPath.row];
+    NSString *url = res.url;
+    seven750WebController *ctrl = [[seven750WebController alloc] initWithTitle:@"" withUrl:url];
+    [self.navigationController pushViewController:ctrl animated:YES];
+}
+
 #pragma mark -UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -169,7 +177,7 @@
 {
     NSLog(@"点击了第%ld个按钮",indexPath.row);
     if (indexPath.row == 1) {
-        learningResourceWebController *ctrl  = [[learningResourceWebController alloc] init];
+        seven750WebController *ctrl = [[seven750WebController alloc] initWithTitle:@"学习资源" withUrl:@"https://www.xue8nav.com"];
         [self.navigationController pushViewController:ctrl animated:YES];
     }
 }

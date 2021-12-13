@@ -94,6 +94,7 @@
             responseBlcok(resultArr);
         }
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+             responseBlcok(nil);
              NSLog(@"请求失败");
          }];
 }

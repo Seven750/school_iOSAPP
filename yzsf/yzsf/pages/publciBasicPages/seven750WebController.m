@@ -18,6 +18,16 @@
 
 @implementation seven750WebController
 
+- (instancetype)initWithTitle:(NSString *)title withUrl:(NSString *)url
+{
+    self = [super init];
+    if (self) {
+        self.webUrl = url;
+        self.title = title;
+    }
+    return  self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -33,7 +43,7 @@
 -(NSString *)getWebUrl
 {
     //一定要加协议http才可以
-    return @"https://www.baidu.com";
+    return self.webUrl;;
 }
 
 -(void)webViewInit

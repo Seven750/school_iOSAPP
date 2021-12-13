@@ -9,7 +9,7 @@
 #import "util.h"
 #import "homepageCollectionViewCell.h"
 #import "resourcePlatformViewController.h"
-#import "websiteWebController.h"
+#import "seven750WebController.h"
 
 #define scrollView_width  CGRectGetWidth(self.scrollView.frame)
 #define scrollView_heitht  CGRectGetHeight(self.scrollView.frame)
@@ -231,7 +231,7 @@
 {
     NSLog(@"点击了第%ld个按钮",indexPath.row);
     if (indexPath.row == 0) {
-        websiteWebController *ctrl = [[websiteWebController alloc] init];
+        seven750WebController *ctrl = [[seven750WebController alloc] initWithTitle:@"官网" withUrl:@"http://www.zzu.edu.cn"];
         [self.navigationController pushViewController:ctrl animated:YES];
     }
     if (indexPath.row == 1) {

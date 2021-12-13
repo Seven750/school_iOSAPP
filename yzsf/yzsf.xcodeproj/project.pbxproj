@@ -21,7 +21,6 @@
 		144A81E0274DFBA3004C7FC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 144A81DE274DFBA3004C7FC9 /* LaunchScreen.storyboard */; };
 		144A81E3274DFBA3004C7FC9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 144A81E2274DFBA3004C7FC9 /* main.m */; };
 		144A820D274E054A004C7FC9 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 144A820B274E054A004C7FC9 /* SceneDelegate.m */; };
-		148A318A276709FE005C0EC7 /* learningResourceWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 148A3189276709FE005C0EC7 /* learningResourceWebController.m */; };
 		14AB0684275650FA00238F1D /* util.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AB0683275650FA00238F1D /* util.m */; };
 		14AB06AA275651D900238F1D /* mainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AB06A8275651D900238F1D /* mainTabBarViewController.m */; };
 		14AB06BE2756584700238F1D /* seven750ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AB06BD2756584700238F1D /* seven750ViewController.m */; };
@@ -41,7 +40,6 @@
 		14F37FB5275EE9B000A59224 /* topPlatformCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F37FB3275EE9B000A59224 /* topPlatformCollectionViewCell.m */; };
 		14F37FB6275EE9B000A59224 /* topPlatformCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14F37FB4275EE9B000A59224 /* topPlatformCollectionViewCell.xib */; };
 		14F37FBC275F512000A59224 /* seven750WebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F37FBB275F512000A59224 /* seven750WebController.m */; };
-		14F37FC0275F559100A59224 /* websiteWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F37FBF275F559100A59224 /* websiteWebController.m */; };
 		14F37FC6275F9CDE00A59224 /* pageLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F37FC5275F9CDE00A59224 /* pageLoadingView.m */; };
 		467F7C00F8C25EC659015297 /* libPods-yzsf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8A8B0D28D980E0E6DA93D62 /* libPods-yzsf.a */; };
 /* End PBXBuildFile section */
@@ -90,8 +88,6 @@
 		144A81F2274DFBA3004C7FC9 /* yzsfUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = yzsfUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		144A820B274E054A004C7FC9 /* SceneDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		144A820C274E054A004C7FC9 /* SceneDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		148A3188276709FE005C0EC7 /* learningResourceWebController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = learningResourceWebController.h; sourceTree = "<group>"; };
-		148A3189276709FE005C0EC7 /* learningResourceWebController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = learningResourceWebController.m; sourceTree = "<group>"; };
 		14AB0682275650FA00238F1D /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = util.h; path = publicMethod/util.h; sourceTree = "<group>"; };
 		14AB0683275650FA00238F1D /* util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = util.m; path = publicMethod/util.m; sourceTree = "<group>"; };
 		14AB06A8275651D900238F1D /* mainTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = mainTabBarViewController.m; path = pages/mainTabBarViewController.m; sourceTree = "<group>"; };
@@ -125,8 +121,6 @@
 		14F37FB4275EE9B000A59224 /* topPlatformCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = topPlatformCollectionViewCell.xib; path = pages/resourcePlatformController/topPlatformCollectionViewCell.xib; sourceTree = "<group>"; };
 		14F37FBA275F512000A59224 /* seven750WebController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = seven750WebController.h; sourceTree = "<group>"; };
 		14F37FBB275F512000A59224 /* seven750WebController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = seven750WebController.m; sourceTree = "<group>"; };
-		14F37FBE275F559100A59224 /* websiteWebController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = websiteWebController.h; sourceTree = "<group>"; };
-		14F37FBF275F559100A59224 /* websiteWebController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = websiteWebController.m; sourceTree = "<group>"; };
 		14F37FC4275F9CDE00A59224 /* pageLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pageLoadingView.h; path = publicMethod/pageLoadingView.h; sourceTree = "<group>"; };
 		14F37FC5275F9CDE00A59224 /* pageLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = pageLoadingView.m; path = publicMethod/pageLoadingView.m; sourceTree = "<group>"; };
 		5D7CFA8A71E335A46ED5B91F /* Pods-yzsf.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yzsf.debug.xcconfig"; path = "Target Support Files/Pods-yzsf/Pods-yzsf.debug.xcconfig"; sourceTree = "<group>"; };
@@ -322,10 +316,6 @@
 		14F37FBD275F551200A59224 /* webPages */ = {
 			isa = PBXGroup;
 			children = (
-				14F37FBE275F559100A59224 /* websiteWebController.h */,
-				14F37FBF275F559100A59224 /* websiteWebController.m */,
-				148A3188276709FE005C0EC7 /* learningResourceWebController.h */,
-				148A3189276709FE005C0EC7 /* learningResourceWebController.m */,
 			);
 			name = webPages;
 			path = pages/webPages;
@@ -520,7 +510,6 @@
 				14AB06AA275651D900238F1D /* mainTabBarViewController.m in Sources */,
 				144A81E3274DFBA3004C7FC9 /* main.m in Sources */,
 				14D04F2E27590CCA00A30DDA /* seven750TableCell.m in Sources */,
-				148A318A276709FE005C0EC7 /* learningResourceWebController.m in Sources */,
 				1423B1A72758EA9D006A6837 /* homepageViewController.m in Sources */,
 				14F37FB5275EE9B000A59224 /* topPlatformCollectionViewCell.m in Sources */,
 				144A820D274E054A004C7FC9 /* SceneDelegate.m in Sources */,
@@ -529,7 +518,6 @@
 				14AB06D82757C2E800238F1D /* basicsNetworkRequest.m in Sources */,
 				1423B1942758EA53006A6837 /* resourcePlatformModel.m in Sources */,
 				14AB06BE2756584700238F1D /* seven750ViewController.m in Sources */,
-				14F37FC0275F559100A59224 /* websiteWebController.m in Sources */,
 				14AB06E12758D5A300238F1D /* topPlatformViewCell.m in Sources */,
 				14F37FC6275F9CDE00A59224 /* pageLoadingView.m in Sources */,
 				14AB06D52757C06400238F1D /* getTopNews.m in Sources */,
