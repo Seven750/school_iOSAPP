@@ -21,6 +21,7 @@
 		144A81E0274DFBA3004C7FC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 144A81DE274DFBA3004C7FC9 /* LaunchScreen.storyboard */; };
 		144A81E3274DFBA3004C7FC9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 144A81E2274DFBA3004C7FC9 /* main.m */; };
 		144A820D274E054A004C7FC9 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 144A820B274E054A004C7FC9 /* SceneDelegate.m */; };
+		148A318A276709FE005C0EC7 /* learningResourceWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 148A3189276709FE005C0EC7 /* learningResourceWebController.m */; };
 		14AB0684275650FA00238F1D /* util.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AB0683275650FA00238F1D /* util.m */; };
 		14AB06AA275651D900238F1D /* mainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AB06A8275651D900238F1D /* mainTabBarViewController.m */; };
 		14AB06BE2756584700238F1D /* seven750ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AB06BD2756584700238F1D /* seven750ViewController.m */; };
@@ -89,6 +90,8 @@
 		144A81F2274DFBA3004C7FC9 /* yzsfUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = yzsfUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		144A820B274E054A004C7FC9 /* SceneDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		144A820C274E054A004C7FC9 /* SceneDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		148A3188276709FE005C0EC7 /* learningResourceWebController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = learningResourceWebController.h; sourceTree = "<group>"; };
+		148A3189276709FE005C0EC7 /* learningResourceWebController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = learningResourceWebController.m; sourceTree = "<group>"; };
 		14AB0682275650FA00238F1D /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = util.h; path = publicMethod/util.h; sourceTree = "<group>"; };
 		14AB0683275650FA00238F1D /* util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = util.m; path = publicMethod/util.m; sourceTree = "<group>"; };
 		14AB06A8275651D900238F1D /* mainTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = mainTabBarViewController.m; path = pages/mainTabBarViewController.m; sourceTree = "<group>"; };
@@ -321,6 +324,8 @@
 			children = (
 				14F37FBE275F559100A59224 /* websiteWebController.h */,
 				14F37FBF275F559100A59224 /* websiteWebController.m */,
+				148A3188276709FE005C0EC7 /* learningResourceWebController.h */,
+				148A3189276709FE005C0EC7 /* learningResourceWebController.m */,
 			);
 			name = webPages;
 			path = pages/webPages;
@@ -515,6 +520,7 @@
 				14AB06AA275651D900238F1D /* mainTabBarViewController.m in Sources */,
 				144A81E3274DFBA3004C7FC9 /* main.m in Sources */,
 				14D04F2E27590CCA00A30DDA /* seven750TableCell.m in Sources */,
+				148A318A276709FE005C0EC7 /* learningResourceWebController.m in Sources */,
 				1423B1A72758EA9D006A6837 /* homepageViewController.m in Sources */,
 				14F37FB5275EE9B000A59224 /* topPlatformCollectionViewCell.m in Sources */,
 				144A820D274E054A004C7FC9 /* SceneDelegate.m in Sources */,

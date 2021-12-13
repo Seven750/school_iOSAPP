@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface seven750WebController : seven750ViewController<WKUIDelegate,WKNavigationDelegate>
 
+@property (strong,nonatomic) WKBackForwardList * backForwardList;
+
 -(NSString *)getWebUrl;
 
 @end

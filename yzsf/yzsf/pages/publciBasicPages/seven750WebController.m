@@ -11,6 +11,9 @@
 @interface seven750WebController ()
 
 @property (strong,nonatomic)  WKWebView *webView;
+
+//添加进度条
+@property(nonatomic,strong) UIProgressView *  progressView;
 @end
 
 @implementation seven750WebController
@@ -19,6 +22,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self webViewInit];
+    [self processViewInit];
+    [self makefourbtn];
+    
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
 }
 
 -(NSString *)getWebUrl
@@ -39,7 +48,7 @@
     // 是否允许手势左滑返回上一级, 类似导航控制的左滑返回
     self.webView.allowsBackForwardNavigationGestures = NO;
     //可返回的页面列表, 存储已打开过的网页
-//   WKBackForwardList * backForwardList = [self.webView backForwardList];
+    self.backForwardList = [self.webView backForwardList];
 
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[self getWebUrl]]];
 
@@ -55,6 +64,23 @@
 //    NSString *htmlString = [[NSString alloc]initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
   //加载本地html文件
 //    [self.webView loadHTMLString:htmlString baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
+    [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
+}
+
+-(void)processViewInit
+{
+    // 创建进度条
+    if (!self.progressView) {
+        LLog(@"%f",navigationBarHeight);
+        self.progressView = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
+        self.progressView.frame = CGRectMake(0, navigationBarHeight, self.view.bounds.size.width, 0.3);
+        // 设置进度条的色彩
+        CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 0.5f);
+        self.progressView.transform = transform;
+        [self.progressView setTrackTintColor:[UIColor clearColor]];
+        self.progressView.progressTintColor = sRGBHex(0x009Dff);
+        [self.view addSubview:self.progressView];
+    }
 }
 
 - (WKWebViewConfiguration *)webViewConfigurationInit
@@ -92,5 +118,113 @@
            
 }
 
+-(void)makefourbtn{
+    //在底部生成几个button用来控制web页面的操作
+    NSArray * WkWeb_Title = @[@"后退",@"重载",@"前进",@"首页"];
+    for (int i= 0 ; i<4; i ++) {
+        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(10+i*((self.view.bounds.size.width-50)/4+10), self.view.bounds.size.height- safeAreaInsetsBottom - 45, (self.view.bounds.size.width-50)/4, 40);
+        [button setTitle:WkWeb_Title[i] forState:UIControlStateNormal];
+        button.layer.borderWidth = 0.5;
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        button.tag = i;
+        [button addTarget:self action:@selector(ClicK:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:button];
+    }
+}
+-(void)ClicK:(UIButton *)Btn{
+    switch (Btn.tag) {
+        case 0:{
+//            //这个是带缓存的验证
+//            [self.webView reloadFromOrigin];
+            // 是不带缓存的验证，刷新当前页面
+            if (self.webView.canGoBack) {
+                [self.webView goBack];
+            }
+        }
+            break;
+        case 1:{
+           // 后退
+            // 首先判断网页是否可以后退
+            [self.webView reload];
+        }
+            break;
+        case 2:{
+            // 前进
+            // 判断是否可以前进
+            if (self.webView.canGoForward) {
+                [self.webView goForward];
+            }
+        }
+            break;
+        case 3:{
+            //进行跳转,我们设置跳转的返回到第一个界面
+            NSLog(@"%@",self.webView.backForwardList.backList);
+            if (self.webView.backForwardList.backList.count >2) {
+                [self.webView goToBackForwardListItem:self.webView.backForwardList.backList[0]];
+            }
+        }
+            break;
+        default:
+            break;
+    }
+}
 
+#pragma mark - WKNavigationDelegate
+// 页面开始加载时调用
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
+{
+//    [util showLoading];
+    self.progressView.hidden = NO;
+    NSLog(@"开始加载");
+}
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
+{
+//    [util dismissLoading];
+    NSLog(@"加载完成");
+}
+
+- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
+{
+//    [util dismissLoading];
+    NSLog(@"加载失败");
+}
+
+- (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures{
+    // 接收到服务器跳转请求即服务重定向时之后调用
+    WKFrameInfo *frameInfo = navigationAction.targetFrame;
+        if (![frameInfo isMainFrame]) {
+        [webView loadRequest:navigationAction.request];
+    }
+        return nil;
+}
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
+{
+    // 根据客户端受到的服务器响应头以及response相关信息来决定是否可以跳转
+    if (!navigationAction.targetFrame.isMainFrame) {
+          [webView evaluateJavaScript:@"var a = document.getElementsByTagName('a');for(var i=0;i<a.length;i++){a[i].setAttribute('target','');}" completionHandler:nil];
+      }
+      decisionHandler(WKNavigationActionPolicyAllow);
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"estimatedProgress"]) {
+        if (object == self.webView) {
+            LLog(@"进度信息%f",self.webView.estimatedProgress);
+            if (self.webView.estimatedProgress == 1) {
+                self.progressView.hidden = YES;
+            }else{
+                self.progressView.progress = self.webView.estimatedProgress;
+            }
+        }
+    }
+}
+
+- (void)dealloc
+{
+    [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
+}
 @end

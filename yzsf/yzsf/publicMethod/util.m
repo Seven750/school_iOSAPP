@@ -177,4 +177,28 @@
     [util showLoadingWithMessage:message];
     [util enableUserInteraction:isEnable];
 }
+
+
+//获取当前的window
+ 
++(UIWindow*)getCurrentWindow{
+    
+    if ([[[UIApplication sharedApplication] delegate]window]) {
+        return [[[UIApplication sharedApplication] delegate]window];
+    } else {
+        if (@available(iOS 13.0,*)) {
+       UIWindow *foundWindow = nil;
+      NSArray  *windows = [[UIApplication sharedApplication]windows];
+       for (UIWindow  *window in windows) {
+         if (window.isKeyWindow) {
+            foundWindow = window;
+            break;
+         }
+    }
+    return foundWindow;
+        } else {
+            return  [UIApplication sharedApplication].keyWindow;
+        }
+    }
+}
 @end

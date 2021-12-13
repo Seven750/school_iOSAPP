@@ -10,7 +10,7 @@
 #import "topPlatformViewCell.h"
 #import "newsPlatformViewCell.h"
 #import "topPlatformCollectionViewCell.h"
-
+#import "learningResourceWebController.h"
 
 @interface resourcePlatformViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableV;
@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionV;
 @property (strong,nonatomic) NSMutableArray *dataSourceC;
 @property (strong,nonatomic) resourcePlatformModel *model;
+
+@property (assign,nonatomic) bool isLoading;
 @end
 
 @implementation resourcePlatformViewController
@@ -35,7 +37,7 @@
     [self tableViewInitialization];
     
     //初始化collectionView内容
-    self.dataSourceC = [[NSMutableArray alloc] initWithArray:@[@"兼职信息",@"软件资源",@"失物招领",@"影视资源",@"校内二手",@"其他功能"]];
+    self.dataSourceC = [[NSMutableArray alloc] initWithArray:@[@"兼职信息",@"学习资源",@"失物招领",@"影视资源",@"校内二手",@"其他功能"]];
     [self collectionViewInitialization];
 }
 
@@ -166,6 +168,10 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"点击了第%ld个按钮",indexPath.row);
+    if (indexPath.row == 1) {
+        learningResourceWebController *ctrl  = [[learningResourceWebController alloc] init];
+        [self.navigationController pushViewController:ctrl animated:YES];
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -182,7 +188,7 @@
     float reload_distance = -50;
     if (y > h + reload_distance) {
 //        NSLog(@"需要加载了");
-        [self.model getTopNewsInfoPage:(self.dataSourceT.count/10 + 1) Block:^(NSMutableArray * _Nonnull resultArr) {
+        [self.model getTopNewsInfoPage:(2) Block:^(NSMutableArray * _Nonnull resultArr) {
             [self.dataSourceT addObjectsFromArray:resultArr];
             [self.tableV reloadData];
         }];
