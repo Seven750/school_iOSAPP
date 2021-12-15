@@ -28,6 +28,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"资源平台";
+    //初始化加载状态
+    self.isLoading = NO;
     [util showLoading];
     //model的初始化
     self.model = [[resourcePlatformModel alloc] init];
@@ -128,7 +130,7 @@
 {
     TopNewsResponse *res= self.dataSourceT[indexPath.row];
     NSString *url = res.url;
-    seven750WebController *ctrl = [[seven750WebController alloc] initWithTitle:@"" withUrl:url];
+    seven750WebController *ctrl = [[seven750WebController alloc] initWithTitle:@"" withUrl:url showPageBtn:YES];
     [self.navigationController pushViewController:ctrl animated:YES];
 }
 
@@ -176,10 +178,32 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"点击了第%ld个按钮",indexPath.row);
-    if (indexPath.row == 1) {
-        seven750WebController *ctrl = [[seven750WebController alloc] initWithTitle:@"学习资源" withUrl:@"https://www.xue8nav.com"];
-        [self.navigationController pushViewController:ctrl animated:YES];
+    NSString *url;
+    NSString *title;
+    BOOL showPageBtn = YES;
+    BOOL isWebView = NO;
+    switch (indexPath.row) {
+        case 1:
+            url = @"https://www.xue8nav.com";
+            title = @"学习资源";
+            isWebView = YES;
+            break;
+        case 3:
+            url = @"https://www.cupfox.com";
+            title = @"影视资源";
+            showPageBtn = NO;
+            isWebView = YES;
+            break;
+        default:
+            break;
     }
+    if (isWebView) {
+        seven750WebController *ctrl = [[seven750WebController alloc] initWithTitle:title withUrl:url showPageBtn:showPageBtn];
+        [self.navigationController pushViewController:ctrl animated:YES];
+    }else{
+        
+    }
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -194,11 +218,13 @@
 //    NSLog(@"offset:%f  bounds:%f  size:%f   inset:%f",offset.y,bounds.size.height,size.height,inset.bottom);
 
     float reload_distance = -50;
-    if (y > h + reload_distance) {
+    if (y > h + reload_distance && !self.isLoading) {
 //        NSLog(@"需要加载了");
-        [self.model getTopNewsInfoPage:(2) Block:^(NSMutableArray * _Nonnull resultArr) {
+        self.isLoading = YES;
+        [self.model getTopNewsInfoPage:(self.dataSourceT.count/10 + 1) Block:^(NSMutableArray * _Nonnull resultArr) {
             [self.dataSourceT addObjectsFromArray:resultArr];
             [self.tableV reloadData];
+            self.isLoading = NO;
         }];
     }
 }

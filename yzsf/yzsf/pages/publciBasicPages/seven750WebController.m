@@ -14,16 +14,19 @@
 
 //添加进度条
 @property(nonatomic,strong) UIProgressView *  progressView;
+@property (strong,nonatomic) NSString *webUrl;
+@property (assign,nonatomic) BOOL showPageBtn;
 @end
 
 @implementation seven750WebController
 
-- (instancetype)initWithTitle:(NSString *)title withUrl:(NSString *)url
+- (instancetype)initWithTitle:(NSString *)title withUrl:(NSString *)url showPageBtn:(BOOL)showPageBtn
 {
     self = [super init];
     if (self) {
         self.webUrl = url;
         self.title = title;
+        self.showPageBtn = showPageBtn;
     }
     return  self;
 }
@@ -33,7 +36,9 @@
     // Do any additional setup after loading the view.
     [self webViewInit];
     [self processViewInit];
-    [self makefourbtn];
+    if (self.showPageBtn) {
+        [self makefourbtn];
+    }
     
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
@@ -58,7 +63,7 @@
     // 是否允许手势左滑返回上一级, 类似导航控制的左滑返回
     self.webView.allowsBackForwardNavigationGestures = NO;
     //可返回的页面列表, 存储已打开过的网页
-    self.backForwardList = [self.webView backForwardList];
+//    WKBackForwardList *backForwardList = [self.webView backForwardList];
 
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[self getWebUrl]]];
 
@@ -130,21 +135,25 @@
 
 -(void)makefourbtn{
     //在底部生成几个button用来控制web页面的操作
-    NSArray * WkWeb_Title = @[@"后退",@"重载",@"前进",@"首页"];
+//    NSArray * WkWeb_Title = @[@"后退",@"重载",@"前进",@"首页"];
+    NSArray * WkWeb_Title = @[@"重载",@"前进",@"后退",@"首页"];
     for (int i= 0 ; i<4; i ++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(10+i*((self.view.bounds.size.width-50)/4+10), self.view.bounds.size.height- safeAreaInsetsBottom - 45, (self.view.bounds.size.width-50)/4, 40);
+//        button.frame = CGRectMake(10+i*((self.view.bounds.size.width-50)/4+10), self.view.bounds.size.height- safeAreaInsetsBottom - 45, (self.view.bounds.size.width-50)/4, 40);
+        button.frame = CGRectMake(10, self.view.bounds.size.height- safeAreaInsetsBottom - 48 -i*48, 44, 44);
         [button setTitle:WkWeb_Title[i] forState:UIControlStateNormal];
         button.layer.borderWidth = 0.5;
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         button.tag = i;
         [button addTarget:self action:@selector(ClicK:) forControlEvents:UIControlEventTouchUpInside];
+        button.layer.cornerRadius = 22;
+        button.clipsToBounds = YES;
         [self.view addSubview:button];
     }
 }
 -(void)ClicK:(UIButton *)Btn{
     switch (Btn.tag) {
-        case 0:{
+        case 2:{
 //            //这个是带缓存的验证
 //            [self.webView reloadFromOrigin];
             // 是不带缓存的验证，刷新当前页面
@@ -153,13 +162,13 @@
             }
         }
             break;
-        case 1:{
+        case 0:{
            // 后退
             // 首先判断网页是否可以后退
             [self.webView reload];
         }
             break;
-        case 2:{
+        case 1:{
             // 前进
             // 判断是否可以前进
             if (self.webView.canGoForward) {
@@ -170,7 +179,7 @@
         case 3:{
             //进行跳转,我们设置跳转的返回到第一个界面
             NSLog(@"%@",self.webView.backForwardList.backList);
-            if (self.webView.backForwardList.backList.count >2) {
+            if (self.webView.backForwardList.backList.count >0) {
                 [self.webView goToBackForwardListItem:self.webView.backForwardList.backList[0]];
             }
         }

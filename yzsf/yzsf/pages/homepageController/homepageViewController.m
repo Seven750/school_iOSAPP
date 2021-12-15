@@ -231,7 +231,7 @@
 {
     NSLog(@"点击了第%ld个按钮",indexPath.row);
     if (indexPath.row == 0) {
-        seven750WebController *ctrl = [[seven750WebController alloc] initWithTitle:@"官网" withUrl:@"http://www.zzu.edu.cn"];
+        seven750WebController *ctrl = [[seven750WebController alloc] initWithTitle:@"官网" withUrl:@"http://www.zzu.edu.cn" showPageBtn:YES];
         [self.navigationController pushViewController:ctrl animated:YES];
     }
     if (indexPath.row == 1) {
@@ -252,11 +252,22 @@
 }
 
 - (IBAction)imgViewConrtolClick:(id)sender {
+    
+    //用下面这个方法进行暂停是正常的
+    self.myTimer.fireDate = [NSDate distantFuture];
+    //用invalidate的话  计时器就被移除runloop了，self也不会强引用timer了
+    //[self.myTimer invalidate];
     NSUInteger page = self.imgViewControl.currentPage;
     CGRect bounds = self.scrollView.bounds;
     bounds.origin.x = CGRectGetWidth(bounds) * page;
     bounds.origin.y = self.scrollView.frame.origin.y;
     [self.scrollView scrollRectToVisible:bounds animated:YES];
+    
+    //重启计时器
+    //self.myTimer.fireDate = [NSDate distantPast];
+    //但是因为这里我要有个延迟
+    self.myTimer.fireDate = [NSDate dateWithTimeIntervalSinceNow:2];
+
 }
 
 @end

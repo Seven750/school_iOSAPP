@@ -15,7 +15,7 @@
     topNewsRequest *req = [topNewsRequest new];
     req.key = @"5fd5cc1bd54acfc621ce335410f06fee";
     req.type = @"keji";
-    req.page = 1;
+    req.page = pageNum;
     req.page_size = 10;
     req.is_filter = 1;
     
